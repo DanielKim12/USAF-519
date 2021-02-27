@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
     char *endptr;
     sum += strtol(argv[i], &endptr, 10);
     if(endptr != argv[i] + strlen(argv[i])) {
-        printf("%s is not an integer\n", argv[i]);
+        printf("'%s' is not an integer\n", argv[i]);
         return 1;
     }
   }
