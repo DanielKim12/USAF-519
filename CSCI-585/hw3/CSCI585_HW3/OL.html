@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>OL</title>
+<script src="https://openlayers.org/api/OpenLayers.js">
+</script>
+<style>
+#map {
+    width:400px;
+    height:400px;
+}
+</style>
+</head>
+
+<body>
+<div id="map"></div>
+
+<script>
+// your JS code 
+/*
+console.log("Hola, all!");
+alert("Hello JS World!");
+*/
+// my data is a label/ID for what we store, which is the object stored in variable d, 
+// whose value is {"k1":[{"a":5, "b":-6}]}, which consists of a key called k1 
+// with an array as its value: [{"a":5, "b":-6}]
+/*
+var d = {"k1":[{"a":5, "b":-6}]};
+localStorage.setItem("myData",JSON.stringify(d));
+*/
+var d = {"points":[
+        //food
+        {"x": 34.02413515897759, "y": -118.28408527273686},
+        {"x": 34.02051821637171, "y": -118.28609429499947},
+        {"x": 34.02524762358723, "y": -118.28517760738787},
+        {"x": 34.01866602248895, "y": -118.28328109357346},
+        {"x": 34.0192625920954, "y": -118.28349041340586}, 
+        {"x": 34.021914532135305, "y": -118.28369420419224},
+        {"x": 34.02058803329364, "y": -118.28369420419224},
+        {"x": 34.021755220000976, "y": -118.28294371592806}, 
+        {"x": 34.018820145688814, "y": -118.28240180010164},
+        {"x": 34.02401253615264, "y": -118.28661902381548},
+        {"x": 34.02027449779875, "y": -118.28497221859995},
+        {"x": 34.02050913434257, "y": -118.28612093505285},
+        {"x": 34.03260775299555, "y": -118.28199817598191},  
+]};
+
+localStorage.setItem("myData", JSON.stringify(d));
+// you'd need to modify the above, to store all your points
+//next [presumably after closing the browser, and reloading our html]
+// we can fetch the stored data, just by supplying its key:
+// here's how to plot points on a map, using OpenLayers:
+// [this is code I mildly modified, from an existing source]
+var dataStored = JSON.parse(localStorage.getItem("myData"));
+// verify that we fetched our data correctly
+console.log(dataStored); 
+
+function initMap() {
+        map = new OpenLayers.Map('map');
+        basemap = new OpenLayers.Layer.OSM("Simple OSM Map");
+        map.addLayer(basemap);
+        markers = new OpenLayers.Layer.Markers("Markers");
+        map.addLayer(markers);
+}// initMap()
+
+function addMarker(latitude, longitude) {
+        var lonLat = new OpenLayers.LonLat(longitude, latitude)
+            .transform(
+                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                map.getProjectionObject() // to Spherical Mercator Projection
+        );
+        var point = new OpenLayers.Marker(lonLat);
+        markers.addMarker(point);
+        map.setCenter(lonLat, 13); // second arg is zoom level
+        console.log(latitude + ", " + longitude);
+}// addMarker()
+
+
+// load and setup map layers
+initMap();
+
+// we can iterate through our array [of points], like so:
+var a = dataStored.points; // a will contain our array
+console.log(a)
+for(var indx in a) { // indx is 0,1,2...
+  console.log(a[indx]); // this could be a single point
+  addMarker(a[indx].x, a[indx].y)
+}
+
+/* // here's how to plot just ONE [lat,long] on the map! 
+addMarker(34.02413515897759,-118.28408527273686); //cava
+addMarker(34.02051821637171,-118.28609429499947); //seeds
+addMarker(34.02524762358723,-118.28517760738787); //kenji
+addMarker(34.01866602248895,-118.28328109357346); //marshall
+addMarker(34.0192625920954,-118.28349041340586); //price
+addMarker(34.021914532135305,-118.28603709763472); //annenberg
+addMarker(34.02058803329364,-118.28369420419224); //libft
+addMarker(34.02027449779875,-118.28497221859995); //mainft
+addMarker(34.02050913434257,-118.28612093505285); //feft
+addMarker(34.03260775299555,-118.28199817598191); //my apt  */
+</script>
+
+</body>
+
+</html>
