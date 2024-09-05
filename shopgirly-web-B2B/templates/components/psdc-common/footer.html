@@ -1,0 +1,122 @@
+<footer class="footer" role="contentinfo">
+    {{> components/psdc-common/usp-section}}
+    <div class="footer-info-inn">
+        <div class="container">
+            <section class="footer-info" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                
+                <!-- Newsletter Sign-up Section -->
+                <article class="footer-info-col" data-section-type="newsletterSubscription" style="flex: 2; max-width: 80%;">
+                    <div class="footer-info--col-inn">
+                        {{#if settings.show_newsletter_box}}
+                            <h1 style="font-size: 53px; font-weight: 700;">GIRLY</h1>
+                            <p style="margin-bottom: 20px;">
+                                Sign up for our newsletter, and we’ll say thanks with 10% off your first order. Plus, get early access to sales, personalized content, new arrival drops, and so much more straight to your inbox.
+                           </p>
+                
+                            <div style="display: flex; flex-direction: column;">
+                                {{> components/common/subscription-form}}
+                            </div>
+                        {{/if}}
+                    </div>
+                </article>
+
+
+                <!-- Quick Links Section -->
+                {{#if pages}}
+                <article class="footer-info-col" data-section-type="footer-webPages" style="flex: 1; margin-bottom: 20px;">
+                    <div class="footer-info--col-inn">
+                        <h5 class="footer-info-heading footer-toggle-title">{{lang 'footer.navigate'}}
+                            <svg class="down"><use xlink:href="#icon-keyboard-arrow-down"></use></svg>
+                        </h5>
+                        <div class="footer-toggle-content">
+                            <ul class="footer-info-list">
+                                {{#each pages}}
+                                    {{#if @index '<' '7' }}
+                                        <li>
+                                            <a href="{{url}}">{{name}}</a>
+                                        </li>
+                                    {{/if}}
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                {{/if}}
+
+                <!-- Categories Section -->
+                <article class="footer-info-col" data-section-type="footer-categories" style="flex: 1; margin-bottom: 20px;">
+                    <div class="footer-info--col-inn">
+                        <h5 class="footer-info-heading footer-toggle-title">{{lang 'footer.categories'}}
+                            <svg class="down"><use xlink:href="#icon-keyboard-arrow-down"></use></svg>
+                        </h5>
+                        <div class="footer-toggle-content">
+                            <ul class="footer-info-list">
+                                {{#each categories}}
+                                    {{#if @index '<' '7' }}
+                                        <li>
+                                            <a href="{{url}}">{{name}}</a>
+                                        </li>
+                                    {{/if}}
+                                {{/each}}
+                                <li class="view-all"><a href="/categories">{{lang 'common.view_all'}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                
+                 <!-- Payment Methods and Social Media Section -->
+                <article class="footer-info-col" data-section-type="footer-payment-social" style="flex: 1; max-width: 100%; margin-bottom: 20px;">
+                    <div class="footer-info--col-inn">
+                        {{#or theme_settings.show_accept_amex theme_settings.show_accept_discover theme_settings.show_accept_mastercard theme_settings.show_accept_paypal theme_settings.show_accept_visa}}
+                        <div class="payment" style="margin-bottom: 20px;">
+                            <h5 class="footer-info-heading">{{lang 'payment-method.payment'}}</h5>
+                            {{> components/psdc-common/payment-icons}}
+                        </div>
+                        {{/or}}
+
+                        <!-- Social Media Icons -->
+                        {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
+                        <div class="footer-social-media" style="margin-top: 80px;">
+                            <h5 class="footer-info-heading">{{lang 'social.connect'}}</h5>
+                            {{> components/common/social-links}}
+                        </div>
+                        {{/if}}
+                    </div>
+                </article>
+                
+            </section>
+        </div>
+    </div>
+
+    {{#or theme_settings.show_copyright_footer theme_settings.show_powered_by theme_settings.show_powered_by_bigcommerce}}
+    <div class="footer-bar">
+        <div class="container">
+            <div class="footer-bar-inn">
+                {{#or theme_settings.show_copyright_footer theme_settings.show_powered_by_bigcommerce}}
+                <div class="footer-copyright">
+                    <p class="powered-by">
+                        {{#if theme_settings.show_copyright_footer}}
+                        <span>&copy; {{moment format="YYYY"}}</span>
+                        <span class="theme-color">{{settings.store_name}}</span> <span class="line">|</span>
+                        {{/if}}
+                        {{#if theme_settings.show_powered_by_bigcommerce}}
+                        <span class="bigcommerce">Powered by <a href="https://www.bigcommerce.com/?utm_source=lifestyle&amp;utm_medium=poweredbyBC" rel="nofollow" target="_blank">BigCommerce</a>
+                        <span class="line">|</span>
+                        </span>
+                        {{/if}}
+                        <a class="site-map" href="{{urls.sitemap}}">{{lang 'sitemap.page_title'}}</a>
+                    </p>
+                </div>
+                {{/or}}
+                {{#if theme_settings.show_powered_by}}
+                <div class="footer-copyright">
+                    <p class="powered-by">BigCommerce Theme by <a class="theme-red-color" href="https://www.1center.co/" rel="nofollow" target="_blank">1Center</a></p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{/or}}
+    {{{region name="ssl_site_seal--global"}}}
+</footer>
+

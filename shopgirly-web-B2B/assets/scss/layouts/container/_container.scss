@@ -1,0 +1,33 @@
+// =============================================================================
+// GRID (CSS)
+// =============================================================================
+
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: layout("max") + ($container-padding * 4);
+    padding: 0 $container-padding;
+    position: relative;
+    width: layout("fixed");
+
+    @include breakpoint("large") {
+        padding: 0 ($container-padding * 4);
+    }
+}
+
+.sidebar-quicklinks {
+    display: block;
+    position: fixed;
+    bottom: 10%;
+    right: 3%;
+    z-index: 1000;
+    margin: 0;
+    border: 1px gray solid;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: white;
+    @media only screen and (max-width: 1023px) {
+        display: none;
+    }
+}
