@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
+<Style id="z1">
+<IconStyle><Icon><href>http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png</href></Icon></IconStyle>
+</Style>
+<!-- library-->
+<Placemark><name>leavey</name>
+<styleUrl>#z1</styleUrl><Point><coordinates>-118.28294371592806,34.021755220000976</coordinates></Point>
+</Placemark>
+<Placemark><name>gaughan</name>
+<styleUrl>#z1</styleUrl><Point><coordinates>-118.28240180010164,34.018820145688814</coordinates></Point>
+</Placemark>
+<Placemark><name>wilson</name>
+<styleUrl>#z1</styleUrl><Point><coordinates>-118.28661902381548,34.02401253615264</coordinates></Point>
+</Placemark>
+</Document></kml>
+
+<!-- kml folder -->

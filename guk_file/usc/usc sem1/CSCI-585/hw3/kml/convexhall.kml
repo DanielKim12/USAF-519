@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
+<Placemark>
+<name>ConvexHull</name>
+<Style><LineStyle><color>ffff7d53</color></LineStyle>
+<PolyStyle><color>80fe4d28</color></PolyStyle></Style>
+<Polygon>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-118.28328109357346,34.01866602248895 -118.28612093505285,34.02050913434257 -118.28661902381548,34.02401253615264 -118.28199817598191,34.03260775299555 -118.28240180010164,34.018820145688814 -118.28328109357346,34.01866602248895</coordinates>
+</LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</Placemark>
+</Document></kml>
