@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baskin Robbins 31</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .game-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4caf50;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .game p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .game button {
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+            padding: 12px 24px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .game button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .game #br31-total-count {
+            margin: 20px 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .game #br31-current-player {
+            font-size: 1.5em;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        .player-input {
+            margin-bottom: 20px;
+        }
+
+        .player-input input {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        .game #br31-target-number {
+            font-size: 1.5em;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Baskin Robbins 31</h1>
+        <div class="game" id="baskin-robbins-31">
+            <p id="br31-instructions">Players take turns saying 1 to 3 consecutive numbers. The player who says the target number loses and takes a drink.</p>
+            <div class="player-input">
+                <input type="number" id="player-count" placeholder="Players" min="2">
+                <button onclick="setPlayers()">Set Players</button>
+            </div>
+            <div>
+                <button onclick="startBR31('classic')">Classic Mode (31)</button>
+                <button onclick="startBR31('random')">Random Mode</button>
+                <button onclick="startBR31('mystery')">Mystery Mode</button>
+            </div>
+            <div id="br31-game">
+                <div id="br31-total-count">Total Count: 0</div>
+                <div id="br31-target-number" style="display: none;">Target Number: 31</div>
+                <div id="br31-current-player"></div>
+                <div id="br31-controls"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let br31TotalCount = 0;
+        let br31CurrentPlayer = 1;
+        let br31TotalPlayers = 2;
+        let br31TargetNumber = 31;
+        let isMysteryMode = false;
+
+        function setPlayers() {
+            const playerCountInput = document.getElementById('player-count').value;
+            if (playerCountInput && playerCountInput >= 2) {
+                br31TotalPlayers = parseInt(playerCountInput);
+                alert(`Number of players set to ${br31TotalPlayers}`);
+            } else {
+                alert('Please enter a valid number of players (minimum 2)');
+            }
+        }
+
+        function startBR31(mode) {
+            br31TotalCount = 0;
+            br31CurrentPlayer = 1;
+            isMysteryMode = false;
+
+            if (mode === 'random' || mode === 'mystery') {
+                br31TargetNumber = Math.floor(Math.random() * 50) + 10; // Random number between 10 and 59
+                if (mode === 'mystery') {
+                    isMysteryMode = true;
+                }
+            } else {
+                br31TargetNumber = 31;
+            }
+
+            document.getElementById('br31-total-count').innerText = `Total Count: ${br31TotalCount}`;
+            document.getElementById('br31-target-number').innerText = `Target Number: ${br31TargetNumber}`;
+            document.getElementById('br31-current-player').innerText = `Player ${br31CurrentPlayer}'s turn`;
+
+            if (isMysteryMode) {
+                document.getElementById('br31-target-number').style.display = 'none';
+            } else {
+                document.getElementById('br31-target-number').style.display = 'block';
+            }
+
+            renderBR31Controls();
+        }
+
+        function renderBR31Controls() {
+            const controls = document.getElementById('br31-controls');
+            controls.innerHTML = '';
+            for (let i = 1; i <= 3; i++) {
+                const button = document.createElement('button');
+                button.innerText = `${i} Number${i > 1 ? 's' : ''}`;
+                button.onclick = () => playBR31(i);
+                controls.appendChild(button);
+            }
+        }
+
+        function playBR31(numbers) {
+            br31TotalCount += numbers;
+            document.getElementById('br31-total-count').innerText = `Total Count: ${br31TotalCount}`;
+            if (br31TotalCount >= br31TargetNumber) {
+                alert(`Player ${br31CurrentPlayer} loses! Take a shot!`);
+                startBR31(isMysteryMode ? 'mystery' : br31TargetNumber === 31 ? 'classic' : 'random');
+            } else {
+                br31CurrentPlayer = br31CurrentPlayer % br31TotalPlayers + 1;
+                document.getElementById('br31-current-player').innerText = `Player ${br31CurrentPlayer}'s turn`;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
